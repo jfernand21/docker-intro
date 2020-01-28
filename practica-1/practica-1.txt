@@ -1,0 +1,53 @@
+PRACTICA 1
+
+
+1) Cree un nuevo dockerfile para instalar node pero a partir de la imagen alpine
+
+TIPS:
+* Para agregar paquetes en alpine se usa la instruccion
+pkg add nombre paquete
+* Puede correr una imagen de alpine para descubrir que paquetes necesita y ir armando el docker file
+* Puede ir a docker hub y buscar las etiquetas o versiones especificas de imagenes a usar
+* Recuerde identificar la imagen nueva agregando una etiqueta al momento de su construcción.
+* Agregue el comando para instalar dependecias de paquetes npm definido en el proyecto
+EXTRA:
+Una vez creado el nuevo dockerfile construir y correr la imagen.
+
+
+2) Pruebe acceder al servicio node que corre en el contenedor creado desde el navegador de su equipo
+
+TIPS:
+* Para poder acceder por red al navegador siempre debe exponer el puerto en el comando de ejecución del contenedor
+* Pruebe docker run -p PUERTO_HOST:PUERTO_CONTENEDOR
+* Para poder acceder por red al navegador siempre debe exponer el puerto en el comando de ejecución del contenedor
+EXTRA:
+* ¿De donde proviene la imagen creada? ¿Puedo correr la imagen en otro equipo?
+
+3) Inicie una consola, en el contenedor que se esta ejecutando en el punto 2.
+
+TIPS: 
+* Haga uso del comando docker exec
+* Recuerde indicar los flags para que abra una sesión interactiva.
+EXTRA:
+* Haga un "kill -9 1" dentro del contenedor ¿Que sucedio? Fundamente su respuesta
+
+4) Crear un registro local
+
+PASOS:
+* docker pull registry
+* mkdir ~/registry #Ejecutar en el host
+* docker run -d -p 5000:5000 -v ~/registry:/var/lib/docker registry
+EXTRA:
+* ¿Que hace la opción "-v ~/registry:/var/lib/docker" en la ejecución del comando docker run?
+
+
+5) Subir la imagen construida a su registro local
+
+TIPS:
+* para indicar a que registro se subira la imagen se hace uso de los tags
+* Use el comando "docker tag" para que la imagen creada en el punto 1 tenga la etiqueta localhost:5000/miimagen:1.0
+* Use el comando "docker push etiqueta" para subir su imagen al repositorio
+EXTRA:
+* ¿Que hace el comando docker tag?
+* ¿Que indica en la etiqueta lo que sigue luego de ":"? ejemplo: registry:2.7.1
+* ¿Si se omite una versión al traer una imagen, que versión se trae? ¿que nombre tiene esa etiqueta ?
