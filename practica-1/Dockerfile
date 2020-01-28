@@ -11,4 +11,5 @@ COPY . /app
 EXPOSE 3000
 
 WORKDIR /app
+RUN npm install
 ENTRYPOINT npm start 
