@@ -105,4 +105,5 @@ dist
 
 # Practica-1
 practica-1/node_modules/
+practica-1/package-lock.json
 practica-1/jspm_packages/

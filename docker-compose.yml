@@ -1,0 +1,18 @@
+version: '3' 
+
+services:
+    mongodb:
+        image: mongo:4.0.0 
+        ports:
+          - '27018:27017'
+    backend:
+        build: practica-1
+        command: npm start
+        depends_on:
+                - mongodb
+        environment:
+            - MONGODB_URI=mongodb
+            - MONGODB_PORT=27017
+            - MONGODB_DB=CHISPAS
+        ports:
+            - '8888:3000'
