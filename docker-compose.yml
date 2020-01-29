@@ -1,10 +1,20 @@
 version: '3' 
 
+volumes: 
+    db_store: 
+        driver: local
+        driver_opts:
+          o: bind
+          type: volume
+          device: <RUTA_VOLUMEN>
 services:
+
     mongodb:
-        image: mongo:4.0.0 
+        image: mongo:4.0.0
         ports:
-          - '27018:27017'
+          - '27019:27017'
+        volumes:
+            - db_store:/data/db
     backend:
         build: practica-1
         command: npm start
