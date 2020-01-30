@@ -32,7 +32,7 @@ Se crea el docker-compose
  Tarea:
   - Agregar un Volumen al docker-compose
 
-#### Relase 4.0.0
+### Relase 4.0.0
 
 Se agrega el volumen 
 Tarea:
