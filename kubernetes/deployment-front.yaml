@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment # Tipo de deployment
+metadata:
+  labels:
+    tier: front # Etiqueta para llave-valor para luego seleccionar objetos
+  name: front # Nombre del objeto
+spec:
+  selector:
+    matchLabels: # Selecciona pods controlados por este deployment con etiqueta tier = mongo
+      tier: front 
+  replicas: 2 # Cantidad de pods
+  strategy:
+    type: RollingUpdate # Que estrategia usar para manejar actualizaciones. RollingUpdate | Recreate
+  template:
+    metadata:
+      labels:
+        tier: front # Etiqueta para los pods creados
+    spec:
+      containers:
+      - name: front # Nombre de contenedores creados
+        image: docker.io/jacknavarow/practica1:3.0 # Imagen a desplegar en los pods
+        imagePullPolicy: IfNotPresent # Politica para traer la imagen. PullAlways
+        ports:
+        - containerPort: 3000
+        env: 
+        - name: MONGODB_URI
+          value: svc-mongodb # Importante -> apunta al servicio creado para conectarse a mongo.
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: MONGODB_DB
+          value: APP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 40
+          timeoutSeconds: 1
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+            scheme: HTTP
+          timeoutSeconds: 1
+          periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 3

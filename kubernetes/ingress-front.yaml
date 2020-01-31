@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-front
+spec:
+  rules:
+  - host: app-bakan.192.168.99.101.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: svc-front
+          servicePort: 3000

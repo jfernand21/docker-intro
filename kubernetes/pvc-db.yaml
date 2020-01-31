@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim # Tipo de objeto
+metadata:
+  name: pvc-mongo # Nombre del objeto
+spec: # Que se espera hacer
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce # ReadOnly, ReadWriteOnce, ReadWriteMany

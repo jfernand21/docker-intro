@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment # Tipo de deployment
+metadata:
+  labels:
+    tier: mongo # Etiqueta para llave-valor para luego seleccionar objetos
+  name: mongodb # Nombre del objeto
+spec:
+  selector:
+    matchLabels: # Selecciona pods controlados por este deployment con etiqueta tier = mongo
+      tier: mongo 
+  replicas: 1 # Cantidad de pods
+  strategy:
+    type: Recreate # Que estrategia usar para manejar actualizaciones. RollingUpdate | Recreate
+  template:
+    metadata:
+      labels:
+        app: mongodb # Etiqueta para los pods creados
+    spec:
+      containers:
+      - name: mongodb # Nombre de contenedores creados
+        image: docker.io/mongo:4.0 # Imagen a desplegar en los pods
+        imagePullPolicy: IfNotPresent # Politica para traer la imagen. PullAlways
+        ports:
+        - containerPort: 27017
